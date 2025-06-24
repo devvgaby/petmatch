@@ -60,6 +60,19 @@ class Usuario extends Authenticatable
         return $this->hasMany(Mensagem::class, 'destinatario_id');
     }
 
+    // Verificacse o usuário é administrador
+    public function isAdmin()
+    {
+        return $this->perfil && $this->perfil->nome === 'administrador';
+    }
+
+    // Verifica se o usuário é tutor
+    public function isTutor()
+    {
+        return $this->perfil && $this->perfil->nome === 'tutor';
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
