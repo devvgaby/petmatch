@@ -29,7 +29,7 @@ Route::get('/dashboard', function () {
 
 // Área do Tutor
 Route::middleware(['auth', 'tutor'])->prefix('tutor')->group(function () {
-    Route::get('/dashboard', [DashboardTutorController::class, 'index'])->name('tutor.dashboard');
+    Route::get('/dashboard', [DashboardTutorController::class, 'dashboard'])->name('tutor.dashboard');
     Route::resource('pets', PetController::class);
     Route::resource('matches', MatchController::class);
     Route::resource('postagens', PostagemController::class);
@@ -39,7 +39,7 @@ Route::middleware(['auth', 'tutor'])->prefix('tutor')->group(function () {
 
 // Área do Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardAdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('pets', AdminPetController::class);
     Route::resource('eventos', AdminEventoController::class);

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;  
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardAdminController extends Controller
@@ -9,6 +9,11 @@ class DashboardAdminController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
     public function index()
     {
         //

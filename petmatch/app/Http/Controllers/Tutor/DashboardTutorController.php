@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Tutor;
-use App\Http\Controllers\Controller;  
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardTutorController extends Controller
@@ -9,9 +9,14 @@ class DashboardTutorController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function dashboard()
+    {
+        return view('tutor.dashboard');
+    }
     public function index()
     {
-        //
+
     }
 
     /**
