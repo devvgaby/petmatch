@@ -34,7 +34,7 @@ Route::middleware(['auth', 'tutor'])->prefix('tutor')->group(function () {
     Route::resource('matches', MatchController::class);
     Route::resource('postagens', PostagemController::class);
     Route::resource('eventos', EventoController::class);
-    Route::get('chat', ChatController::class);
+    Route::resource('chat', ChatController::class);
 });
 
 // Área do Admin
