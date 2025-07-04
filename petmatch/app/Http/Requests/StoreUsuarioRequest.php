@@ -30,7 +30,7 @@ class StoreUsuarioRequest extends FormRequest
             'cep' => 'nullable|string|max:10',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
-            'perfil_id' => 'required|exists:perfis,id',
+            'perfil_id' => 'nullable|exists:perfis,id',
         ];
     }
 }
