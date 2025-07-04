@@ -10,6 +10,7 @@ class Mensagem extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'mensagens';
     protected $fillable = [
         'remetente_id',
         'destinatario_id',

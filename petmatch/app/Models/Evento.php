@@ -10,6 +10,7 @@ class Evento extends Model
 {
     use HasFactory, SoftDeletes;
 
+        protected $table = 'eventos';
     protected $fillable = [
         'titulo',
         'descricao',

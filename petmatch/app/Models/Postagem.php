@@ -10,8 +10,12 @@ class Postagem extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'postagens';
     protected $fillable = [
-        'descricao', 'tipo_midia', 'url_midia', 'pet_id'
+        'descricao',
+        'tipo_midia',
+        'url_midia',
+        'pet_id'
     ];
 
     public function pet()

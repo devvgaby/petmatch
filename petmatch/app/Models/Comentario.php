@@ -10,8 +10,11 @@ class Comentario extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'comentarios';
     protected $fillable = [
-        'conteudo', 'usuario_id', 'postagem_id'
+        'conteudo',
+        'usuario_id',
+        'postagem_id'
     ];
 
     public function usuario()
