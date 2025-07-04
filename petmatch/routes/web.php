@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Área Tutor
 use App\Http\Controllers\Tutor\DashboardTutorController;
@@ -28,14 +29,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Área do Tutor
-Route::middleware(['auth', 'tutor'])->prefix('tutor')->group(function () {
-    Route::get('/dashboard', [DashboardTutorController::class, 'dashboard'])->name('tutor.dashboard');
+Route::middleware(['auth', 'tutor'])->prefix('tutor')->as('tutor.')->group(function () {
+    Route::get('/dashboard', [DashboardTutorController::class, 'dashboard'])->name('dashboard');
     Route::resource('pets', PetController::class);
     Route::resource('matches', MatchController::class);
     Route::resource('postagens', PostagemController::class);
     Route::resource('eventos', EventoController::class);
-    Route::resource('chat', ChatController::class);
+    Route::resource('chats', ChatController::class);
 });
+
 
 // Área do Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -51,8 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/logout-test', function () {
-    Auth::logout();
-    return redirect('/login');  //apenas para dar logout na URL enquanto não possui botão
-});
+
+//rota para o redirecionamento para a tela de login ao dar logout
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
 require __DIR__.'/auth.php';
