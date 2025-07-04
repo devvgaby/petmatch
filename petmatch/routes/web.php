@@ -51,5 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/logout-test', function () {
+    Auth::logout();
+    return redirect('/login');  //apenas para dar logout na URL enquanto não possui botão
+});
 require __DIR__.'/auth.php';
