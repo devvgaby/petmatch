@@ -11,6 +11,7 @@ use App\Http\Controllers\Tutor\MatchController;
 use App\Http\Controllers\Tutor\PostagemController;
 use App\Http\Controllers\Tutor\EventoController;
 use App\Http\Controllers\Tutor\ChatController;
+use App\Http\Controllers\Tutor\ComentarioController;
 
 // Área Admin
 use App\Http\Controllers\Admin\DashboardAdminController;
@@ -34,6 +35,8 @@ Route::middleware(['auth', 'tutor'])->prefix('tutor')->as('tutor.')->group(funct
     Route::resource('pets', PetController::class);
     Route::resource('matches', MatchController::class);
     Route::resource('postagens', PostagemController::class);
+    Route::post('comentarios/{postagemId}', [ComentarioController::class, 'store'])->name('comentarios.store');
+    Route::delete('comentarios/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.destroy');
     Route::resource('eventos', EventoController::class);
     Route::resource('chats', ChatController::class);
 });
@@ -57,4 +60,4 @@ Route::middleware('auth')->group(function () {
 //rota para o redirecionamento para a tela de login ao dar logout
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

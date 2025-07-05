@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tutor;
 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Postagem;
 use App\Models\Pet;
@@ -42,7 +42,7 @@ class PostagemController extends Controller
      */
     public function store(Request $request)
     {
-      
+
         $validated = $request->validate([
             'descricao' => 'required|string|max:1000',
             'url_midia' => 'nullable|file|mimes:jpg,jpeg,png,gif,mp4,mov,avi|max:10240', // max 10MB
@@ -79,10 +79,13 @@ class PostagemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        
+        $postagem = Postagem::with(['comentarios.usuario', 'pet'])->findOrFail($id);
+
+        return view('tutor.postagens.show', compact('postagem'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

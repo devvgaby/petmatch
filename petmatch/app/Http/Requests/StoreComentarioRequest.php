@@ -23,8 +23,8 @@ class StoreComentarioRequest extends FormRequest
     {
         return [
             'conteudo' => 'required|string',
-            'usuario_id' => 'required|exists:usuarios,id',
-            'postagem_id' => 'required|exists:postagens,id',
+            // 'usuario_id' => 'required|exists:usuarios,id',
+            // 'postagem_id' => 'required|exists:postagens,id',
         ];
     }
 }

@@ -1,57 +1,27 @@
 <?php
 
 namespace App\Http\Controllers\Tutor;
-use App\Http\Controllers\Controller;  
-use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Comentario;
+use App\Http\Requests\StoreComentarioRequest;
 
 class ComentarioController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreComentarioRequest $request, $postagemId)
     {
-        //
-    }
+        Comentario::create([
+            'conteudo' => $request->conteudo,
+            'usuario_id' => Auth::id(),
+            'postagem_id' => $postagemId,
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        return redirect()->route('tutor.postagens.show', $postagemId)
+            ->with('success', 'Comentário adicionado com sucesso!');
     }
 
     /**
@@ -59,6 +29,15 @@ class ComentarioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comentario = Comentario::findOrFail($id);
+
+        if ($comentario->usuario_id != Auth::id()) {
+            abort(403); 
+        }
+
+        $comentario->delete();
+
+        return redirect()->route('tutor.postagens.show', $comentario->postagem_id)
+            ->with('success', 'Comentário excluído com sucesso!');
     }
 }

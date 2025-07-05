@@ -39,6 +39,7 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir esta postagem?')">Excluir</button>
                     </form>
+                    <a href="{{ route('tutor.postagens.show', $postagem->id) }}" class="btn btn-info btn-sm">Ver Detalhes</a>
                 </div>
             </div>
         @endforeach
