@@ -20,7 +20,6 @@ use App\Http\Controllers\Admin\PetController as AdminPetController;
 use App\Http\Controllers\Admin\EventoController as AdminEventoController;
 use App\Http\Controllers\Admin\PostagemController as AdminPostagemController;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,10 +36,13 @@ Route::middleware(['auth', 'tutor'])->prefix('tutor')->as('tutor.')->group(funct
     Route::resource('postagens', PostagemController::class);
     Route::post('comentarios/{postagemId}', [ComentarioController::class, 'store'])->name('comentarios.store');
     Route::delete('comentarios/{id}', [ComentarioController::class, 'destroy'])->name('comentarios.destroy');
+
     Route::resource('eventos', EventoController::class);
+    Route::get('eventos/validar-cep/{cep}', [EventoController::class, 'validarCep'])->name('eventos.validarCep');
+    Route::post('eventos/obter-geolocalizacao', [EventoController::class, 'obterGeolocalizacao'])->name('eventos.obterGeolocalizacao');
+    
     Route::resource('chats', ChatController::class);
 });
-
 
 // Área do Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
@@ -57,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//rota para o redirecionamento para a tela de login ao dar logout
+// rota para o redirecionamento para a tela de login ao dar logout
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 require __DIR__ . '/auth.php';

@@ -24,12 +24,13 @@ class StoreEventoRequest extends FormRequest
         return [
             'titulo' => 'required|string|max:255',
             'descricao' => 'nullable|string',
-            'data_hora' => 'required|date',
+            'data_hora' => 'required|date|after:now', 
             'local' => 'required|string|max:255',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
             'max_participantes' => 'nullable|integer|min:1',
-            'usuario_id' => 'required|exists:usuarios,id',
+            
         ];
     }
+
 }

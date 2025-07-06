@@ -10,7 +10,7 @@ class Evento extends Model
 {
     use HasFactory, SoftDeletes;
 
-        protected $table = 'eventos';
+    protected $table = 'eventos';
     protected $fillable = [
         'titulo',
         'descricao',
@@ -21,7 +21,9 @@ class Evento extends Model
         'max_participantes',
         'usuario_id'
     ];
-
+    protected $casts = [
+        'data_hora' => 'datetime',
+    ];
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
