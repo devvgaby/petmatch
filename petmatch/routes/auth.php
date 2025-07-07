@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register.store');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::get('validar-cep/{cep}', [RegisteredUserController::class, 'validarCep'])->name('register.validarCep');
+    Route::post('obter-geolocalizacao', [RegisteredUserController::class, 'obterGeolocalizacao'])->name('register.obterGeolocalizacao');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
