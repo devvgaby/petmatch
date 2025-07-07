@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@yield('title') - Tutor - PetMatch</title>
+    <title>@yield('title') - Admin - PetMatch</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
         nav.sidebar {
             width: 260px;
             height: 100vh;
-            background: #7CB77B;
+            background: #4A7C59; 
             position: fixed;
             top: 0;
             left: 0;
@@ -130,7 +130,7 @@
                 top: 1rem;
                 left: 1rem;
                 z-index: 1100;
-                background-color: #7CB77B;
+                background-color: #4A7C59;
                 border: none;
                 color: white;
                 padding: 0.4rem 0.6rem;
@@ -148,45 +148,43 @@
 
     <nav class="sidebar">
         <div class="sidebar-header">
-            <a href="{{ route('tutor.dashboard') }}" class="d-flex align-items-center text-decoration-none text-white">
-                <span class="fs-3 fw-bold">🐾 PetMatch</span>
+            <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center text-decoration-none text-white">
+                <span class="fs-3 fw-bold">🐾 PetMatch Admin</span>
             </a>
         </div>
 
         <div class="sidebar-menu">
             <ul class="nav flex-column">
                 <li>
-                    <span class="menu-title">Meus Pets</span>
+                    <span class="menu-title">Gestão de Usuários</span>
                     <ul class="submenu nav flex-column">
-                        <li><a href="{{ route('tutor.pets.create') }}" class="nav-link">➕ Cadastrar Pet</a></li>
-                        <li><a href="{{ route('tutor.pets.index') }}" class="nav-link">📋 Ver Pets</a></li>
+                        <li><a href="{{ route('admin.usuarios.index') }}" class="nav-link">👥 Listar Usuários</a></li>
+                        <li><a href="{{ route('admin.usuarios.create') }}" class="nav-link">➕ Cadastrar Usuário</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <span class="menu-title">Feed</span>
+                    <span class="menu-title">Gestão de Pets</span>
                     <ul class="submenu nav flex-column">
-                        <li><a href="{{ route('tutor.postagens.create') }}" class="nav-link">📝 Criar Postagem</a></li>
-                        <li><a href="{{ route('tutor.postagens.index') }}" class="nav-link">📄 Ver Feed</a></li>
+                        <li><a href="{{ route('admin.pets.index') }}" class="nav-link">📋 Listar Pets</a></li>
+                        <li><a href="{{ route('admin.pets.create') }}" class="nav-link">➕ Cadastrar Pet</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="{{ route('tutor.matches.index') }}" class="nav-link d-flex align-items-center">
-                        <i class="bi bi-search-heart me-2"></i> Descobrir Pets
-                    </a>
+                    <span class="menu-title">Postagens</span>
+                    <ul class="submenu nav flex-column">
+                        <li><a href="{{ route('admin.postagens.index') }}" class="nav-link">📄 Ver Postagens</a></li>
+                        <li><a href="{{ route('admin.postagens.create') }}" class="nav-link">📝 Criar Postagem</a></li>
+                    </ul>
                 </li>
 
                 <li>
-                    <a href="{{ route('tutor.eventos.index') }}" class="nav-link d-flex align-items-center">
-                        <i class="bi bi-calendar-event me-2"></i> Eventos
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('tutor.chats.index') }}" class="nav-link d-flex align-items-center">
-                        <i class="bi bi-chat-dots me-2"></i> Chat
-                    </a>
+                    <span class="menu-title">Eventos</span>
+                    <ul class="submenu nav flex-column">
+                        <li><a href="{{ route('admin.eventos.index') }}" class="nav-link">📅 Listar Eventos</a></li>
+                        <li><a href="{{ route('admin.eventos.create') }}" class="nav-link">➕ Criar Evento</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
