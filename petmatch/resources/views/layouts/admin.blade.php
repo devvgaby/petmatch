@@ -159,7 +159,6 @@
                     <span class="menu-title">Gestão de Usuários</span>
                     <ul class="submenu nav flex-column">
                         <li><a href="{{ route('admin.usuarios.index') }}" class="nav-link">👥 Listar Usuários</a></li>
-                        <li><a href="{{ route('admin.usuarios.create') }}" class="nav-link">➕ Cadastrar Usuário</a></li>
                     </ul>
                 </li>
 
@@ -167,14 +166,13 @@
                     <span class="menu-title">Gestão de Pets</span>
                     <ul class="submenu nav flex-column">
                         <li><a href="{{ route('admin.pets.index') }}" class="nav-link">📋 Listar Pets</a></li>
-                        <li><a href="{{ route('admin.pets.create') }}" class="nav-link">➕ Cadastrar Pet</a></li>
                     </ul>
                 </li>
 
                 <li>
                     <span class="menu-title">Postagens</span>
                     <ul class="submenu nav flex-column">
-                        <li><a href="{{ route('admin.postagens.index') }}" class="nav-link">📄 Ver Postagens</a></li>
+                        <li><a href="{{ route('admin.postagens.index') }}" class="nav-link">📄 Listar Postagens</a></li>
                         <li><a href="{{ route('admin.postagens.create') }}" class="nav-link">📝 Criar Postagem</a></li>
                     </ul>
                 </li>
