@@ -49,7 +49,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->as('admin.')->group(funct
     Route::get('/dashboard', [DashboardAdminController::class, 'dashboard'])->name('dashboard'); // só "dashboard"
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('pets', AdminPetController::class);
+
     Route::resource('eventos', AdminEventoController::class);
+       Route::get('eventos/validar-cep/{cep}', [AdminEventoController::class, 'validarCep'])->name('eventos.validarCep');
+    Route::post('eventos/obter-geolocalizacao', [AdminEventoController::class, 'obterGeolocalizacao'])->name('eventos.obterGeolocalizacao');
+
     Route::resource('postagens', AdminPostagemController::class);
 });
 
