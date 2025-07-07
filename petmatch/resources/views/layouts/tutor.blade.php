@@ -15,19 +15,38 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #FAF3E0;
             margin: 0;
+            height: 100vh;
+            overflow: hidden;
         }
 
         nav.sidebar {
             width: 260px;
-            min-height: 100vh;
+            height: 100vh;
             background: #7CB77B;
             position: fixed;
             top: 0;
             left: 0;
-            padding-top: 1rem;
             color: white;
             z-index: 1040;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav.sidebar .sidebar-header {
+            padding: 1rem;
+            flex-shrink: 0;
+        }
+
+        nav.sidebar .sidebar-menu {
+            flex: 1 1 auto;
             overflow-y: auto;
+            padding: 0 1rem;
+        }
+
+        nav.sidebar .sidebar-footer {
+            flex-shrink: 0;
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         main.content {
@@ -60,6 +79,7 @@
         nav.sidebar ul.nav {
             padding-left: 0;
             list-style: none;
+            margin: 0;
         }
 
         nav.sidebar ul.nav > li {
@@ -76,6 +96,7 @@
 
         nav.sidebar ul.submenu {
             padding-left: 1.5rem;
+            margin: 0;
         }
 
         nav.sidebar ul.submenu li {
@@ -129,65 +150,60 @@
         <i class="bi bi-list fs-3"></i>
     </button>
 
-    <nav class="sidebar p-3">
-        <a href="{{ route('tutor.dashboard') }}" class="d-flex align-items-center mb-4 text-decoration-none text-white">
-            <span class="fs-3 fw-bold">🐾 PetMatch</span>
-        </a>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <a href="{{ route('tutor.dashboard') }}" class="d-flex align-items-center text-decoration-none text-white">
+                <span class="fs-3 fw-bold">🐾 PetMatch</span>
+            </a>
+        </div>
 
-        <ul class="nav flex-column">
+        <div class="sidebar-menu">
+            <ul class="nav flex-column">
+                <li>
+                    <span class="menu-title">Meus Pets</span>
+                    <ul class="submenu nav flex-column">
+                        <li>
+                            <a href="{{ route('tutor.pets.create') }}" class="nav-link">➕ Cadastrar Pet</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('tutor.pets.index') }}" class="nav-link">📋 Ver Pets</a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>
-                <span class="menu-title">Meus Pets</span>
-                <ul class="submenu nav flex-column">
-                    <li>
-                        <a href="{{ route('tutor.pets.create') }}" class="nav-link">
-                            ➕ Cadastrar Pet
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('tutor.pets.index') }}" class="nav-link">
-                            📋 Ver Pets
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                <li>
+                    <span class="menu-title">Feed</span>
+                    <ul class="submenu nav flex-column">
+                        <li>
+                            <a href="{{ route('tutor.postagens.create') }}" class="nav-link">📝 Criar Postagem</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('tutor.postagens.index') }}" class="nav-link">📄 Ver Feed</a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>
-                <span class="menu-title">Feed</span>
-                <ul class="submenu nav flex-column">
-                    <li>
-                        <a href="{{ route('tutor.postagens.create') }}" class="nav-link">
-                            📝 Criar Postagem
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('tutor.postagens.index') }}" class="nav-link">
-                            📄 Ver Feed
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                <li>
+                    <a href="{{ route('tutor.matches.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="bi bi-search-heart me-2"></i> Descobrir Pets
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{ route('tutor.matches.index') }}" class="nav-link d-flex align-items-center">
-                    <i class="bi bi-search-heart me-2"></i> Descobrir Pets
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('tutor.eventos.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="bi bi-calendar-event me-2"></i> Eventos
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{ route('tutor.eventos.index') }}" class="nav-link d-flex align-items-center">
-                    <i class="bi bi-calendar-event me-2"></i> Eventos
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('tutor.chats.index') }}" class="nav-link d-flex align-items-center">
+                        <i class="bi bi-chat-dots me-2"></i> Chat
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-            <li>
-                <a href="{{ route('tutor.chats.index') }}" class="nav-link d-flex align-items-center">
-                    <i class="bi bi-chat-dots me-2"></i> Chat
-                </a>
-            </li>
-        </ul>
-
-        <div class="mt-4 pt-3 border-top">
+        <div class="sidebar-footer">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
