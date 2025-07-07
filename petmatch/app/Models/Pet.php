@@ -42,4 +42,23 @@ class Pet extends Model
     {
         return $this->hasMany(PetMatch::class, 'pet2_id');
     }
+
+    public function getIdadeFormatadaAttribute()
+    {
+        $totalMeses = $this->idade; // idade em meses
+        $anos = intdiv($totalMeses, 12);
+        $meses = $totalMeses % 12;
+
+        $texto = [];
+
+        if ($anos > 0) {
+            $texto[] = $anos . ' ' . ($anos === 1 ? 'ano' : 'anos');
+        }
+        if ($meses > 0) {
+            $texto[] = $meses . ' ' . ($meses === 1 ? 'mês' : 'meses');
+        }
+
+        return count($texto) > 0 ? implode(' e ', $texto) : '0 mês';
+    }
+
 }
