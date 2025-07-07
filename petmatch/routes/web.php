@@ -45,8 +45,8 @@ Route::middleware(['auth', 'tutor'])->prefix('tutor')->as('tutor.')->group(funct
 });
 
 // Área do Admin
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardAdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware(['auth', 'admin'])->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardAdminController::class, 'dashboard'])->name('dashboard'); // só "dashboard"
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('pets', AdminPetController::class);
     Route::resource('eventos', AdminEventoController::class);
