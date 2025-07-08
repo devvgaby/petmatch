@@ -16,7 +16,6 @@
             background-color: #FAF3E0;
             margin: 0;
             height: 100vh;
-            overflow: hidden;
         }
 
         nav.sidebar {
