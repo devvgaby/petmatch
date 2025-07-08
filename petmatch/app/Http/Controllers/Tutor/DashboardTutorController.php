@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Tutor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Pet;
+use App\Models\Postagem;
+use App\Models\Evento;
+use App\Models\PetMatch;
 
 class DashboardTutorController extends Controller
 {
@@ -10,10 +14,29 @@ class DashboardTutorController extends Controller
      * Display a listing of the resource.
      */
 
-    public function dashboard()
+  public function dashboard()
     {
-        return view('tutor.dashboard');
+        $usuarioId = auth()->id();
+
+        $totalPets = Pet::where('usuario_id', $usuarioId)->count();
+
+        $totalPostagens = Postagem::whereHas('pet', function ($query) use ($usuarioId) {
+            $query->where('usuario_id', $usuarioId);
+        })->count();
+
+        $totalEventos = Evento::where('usuario_id', $usuarioId)->count();
+
+        $totalMatches = PetMatch::whereHas('pet1', function ($query) use ($usuarioId) {
+            $query->where('usuario_id', $usuarioId);
+        })->orWhereHas('pet2', function ($query) use ($usuarioId) {
+            $query->where('usuario_id', $usuarioId);
+        })->count();
+
+        return view('tutor.dashboard', compact(
+            'totalPets', 'totalPostagens', 'totalEventos', 'totalMatches'
+        ));
     }
+
     public function index()
     {
 

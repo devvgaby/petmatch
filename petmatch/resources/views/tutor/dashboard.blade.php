@@ -4,33 +4,53 @@
 
 @section('content')
 <h4 class="mb-4">Olá, {{ Auth::user()->nome }}! 👋</h4>
-    <p>Bem-vindo ao seu painel, aqui você verá um resumo dos seus pets, postagens e atividades recentes.</p>
+<p>Bem-vindo ao seu painel. Aqui está um resumo das suas atividades:</p>
 
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Pets cadastrados</h5>
-                    <p class="card-text display-4">5</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Postagens feitas</h5>
-                    <p class="card-text display-4">12</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Eventos inscritos</h5>
-                    <p class="card-text display-4">3</p>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <canvas id="graficoResumo" height="300"></canvas>
     </div>
+</div>
 @endsection
 
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('graficoResumo').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Pets', 'Postagens', 'Eventos', 'Matches'],
+            datasets: [{
+                label: 'Total',
+                data: [
+                    {{ $totalPets }},
+                    {{ $totalPostagens }},
+                    {{ $totalEventos }},
+                    {{ $totalMatches }}
+                ],
+                backgroundColor: [
+                    '#7CB77B',
+                    '#D97904',
+                    '#FFB347',
+                    '#9B59B6'
+                ],
+                borderRadius: 10,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
+</script>
+@endsection
